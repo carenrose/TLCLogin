@@ -150,4 +150,7 @@
   <data name="StuServiceProgram" xml:space="preserve">
     <value>StudentServiceProgram</value>
   </data>
+  <data name="PastStuServices" xml:space="preserve">
+    <value>Student_StudentService_Past</value>
+  </data>
 </root>

@@ -7,17 +7,6 @@ using System.Threading.Tasks;
 
 namespace TLCLogin.Data
 {
-    /*  SPECIALS
-     *  
-     *  in db as    in file as
-        DESL.FARM	DESL.FARM.AAS
-        DESL.TRK	DESL.TRK.AAS
-        ELEC.ELM	ELEC.ELM.AAS
-        ELEC.ELN	ELEC.ELN.AAS
-        ELEC.ELT	ELEC.ELT.AAS
-        PRE.HEALTH	PRE.HEALTH
-     */
-
     public static class StudentFileReader
     {
         private static string filePath = 
@@ -101,10 +90,43 @@ namespace TLCLogin.Data
             return student;
         }
 
+
+        /*
+         * in db as    in file as
+            DESL.FARM	DESL.FARM.AAS
+            DESL.TRK	DESL.TRK.AAS
+            ELEC.ELM	ELEC.ELM.AAS
+            ELEC.ELN	ELEC.ELN.AAS
+            ELEC.ELT	ELEC.ELT.AAS
+            PRE.HEALTH	PRE.HEALTH
+         */
         private static string ParseProgramOfStudy(string column)
         {
-            string prog = column.Split('.')[0];
+            string prog = "";
+            string[] split = column.Split('.');
+
+            if (split.Length == 3)
+            {
+                switch (split[0] + "." + split[1])
+                {
+                    case "DESL.FARM":
+                    case "DESL.TRK":
+                    case "ELEC.ELM":
+                    case "ELEC.ELN":
+                    case "ELEC.ELT":
+                        prog = split[0] + "." + split[1];
+                        break;
+                }
+            }
+            else if (column == "PRE.HEALTH")
+            {
+                prog = column;
+            }
+
+            // if it wasn't assigned
+            if(prog == "" ) prog = split[0];
             
+            // check if in database
             if (! TLCLoginDA.GetAllProgramsOfStudy().ContainsKey(prog))
                 prog = "ZZZ";
 

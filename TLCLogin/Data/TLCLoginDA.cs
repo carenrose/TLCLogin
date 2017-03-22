@@ -108,15 +108,6 @@ namespace TLCLogin.Data
             {
                 if (conn != null) conn.Close();
             }
-            
-            // if the student was not found in the database
-            // (ie, they have not logged in yet this quarter)
-            // then search the file for them
-            if (student == null)
-            {
-                student = StudentFileReader.GetStudentByID(id);
-            }
-
             return student;
         }
 
@@ -197,6 +188,17 @@ namespace TLCLogin.Data
                     cmd.Parameters["@serv"].Value = prog.ID;
                     cmd.ExecuteNonQuery();
                 }
+
+                // insert into "past" table
+                cmd.CommandText = "INSERT INTO " + DBSchemaTables.PastStuServices +
+                                  "(StudentID, ProgramID) " +
+                                  "VALUES (@stuid, @serv)";
+
+                foreach (SpecialProgram prog in student.SpecialPrograms)
+                {
+                    cmd.Parameters["@serv"].Value = prog.ID;
+                    try { cmd.ExecuteNonQuery(); } catch (OleDbException) { }
+                }
             }
             catch (Exception ex) when (ex is OleDbException || ex is InvalidOperationException)
             {
@@ -262,6 +264,17 @@ namespace TLCLogin.Data
                 {
                     cmd.Parameters["@serv"].Value = prog.ID;
                     cmd.ExecuteNonQuery();
+                }
+
+                // insert into "past" table
+                cmd.CommandText = "INSERT INTO " + DBSchemaTables.PastStuServices +
+                                  "(StudentID, ProgramID) " +
+                                  "VALUES (@stuid, @serv)";
+
+                foreach (SpecialProgram prog in student.SpecialPrograms)
+                {
+                    cmd.Parameters["@serv"].Value = prog.ID;
+                    try { cmd.ExecuteNonQuery(); } catch (OleDbException) { }
                 }
             }
             catch (Exception ex) when (ex is OleDbException || ex is InvalidOperationException)

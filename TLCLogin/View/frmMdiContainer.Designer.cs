@@ -41,9 +41,10 @@
             this.editSpecialProgramsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeLogoutSurveyFrequencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fbdBackupDirectoryChooser = new System.Windows.Forms.FolderBrowserDialog();
             this.createBackupOfDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fbdBackupDirectoryChooser = new System.Windows.Forms.FolderBrowserDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.sfdDatabaseBackup = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -163,6 +164,10 @@
             // 
             this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
+            // sfdDatabaseBackup
+            // 
+            this.sfdDatabaseBackup.Title = "Save Backup Of Database";
+            // 
             // frmMdiContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,6 +215,7 @@
         private System.Windows.Forms.FolderBrowserDialog fbdBackupDirectoryChooser;
         private System.Windows.Forms.ToolStripMenuItem createBackupOfDatabaseToolStripMenuItem;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.SaveFileDialog sfdDatabaseBackup;
     }
 }
 

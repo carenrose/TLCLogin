@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.FileIO;
 
 namespace TLCLogin.View
 {
@@ -25,6 +26,17 @@ namespace TLCLogin.View
 
             //if (! this.menuStrip1.Items.Contains(adminToolStripMenuItem))
             //    this.menuStrip1.Items.Add(adminToolStripMenuItem);
+
+            //this.exitToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            //this.closeCenterToolStripMenuItem,
+            //this.quitToolStripMenuItem});
+
+            //this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            //this.addRemoveAdminToolStripMenuItem,
+            //this.viewLogonsToolStripMenuItem,
+            //this.viewStudentsHoursThisWeekToolStripMenuItem,
+            //this.manageOptionsToolStripMenuItem,
+            //this.createBackupOfDatabaseToolStripMenuItem});
         }
         
         /// <summary>
@@ -378,10 +390,45 @@ namespace TLCLogin.View
 
         private void createBackupOfDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fbdBackupDirectoryChooser.SelectedPath = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
-            DialogResult dr = fbdBackupDirectoryChooser.ShowDialog();
+            string dir = AppDomain.CurrentDomain.GetData("DataDirectory").ToString() + @"\";
+            string origFilename = "TLCLoginDatabase.mdb";
 
-            MessageBox.Show(dr.ToString());
+            string quarter = "Quarter";
+            switch (DateTime.Now.Month)
+            {
+                case 1:
+                case 2:
+                case 3:
+                    quarter = "Winter";
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    quarter = "Spring";
+                    break;
+                case 7:
+                case 8:
+                case 9:
+                    quarter = "Summer";
+                    break;
+                case 10:
+                case 11:
+                case 12:
+                    quarter = "Fall";
+                    break;
+            }
+
+            string backupDir = dir + @"\Backup";
+            string newFilename = DateTime.Now.Year + "_" + quarter + ".mdb";
+            
+            // show file dialog
+            sfdDatabaseBackup.InitialDirectory = backupDir;
+            sfdDatabaseBackup.FileName = newFilename;
+            sfdDatabaseBackup.DefaultExt = "mdb";
+            sfdDatabaseBackup.ShowDialog();
+
+            string saved = sfdDatabaseBackup.FileName;
+            FileSystem.CopyFile(dir + origFilename, saved);
         }
 
         #endregion

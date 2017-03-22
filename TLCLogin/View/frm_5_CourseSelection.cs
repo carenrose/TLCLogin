@@ -35,6 +35,9 @@ namespace TLCLogin.View
                     .Select(kv => new { Key = kv.Key, Value = kv.Key + ": " + kv.Value }).ToArray();
                 cboCourseCategory.ValueMember = "Key";
                 cboCourseCategory.DisplayMember = "Value";
+                // select nothing
+                cboCourseCategory.SelectedIndex = -1;
+                cboCourse.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
@@ -44,6 +47,9 @@ namespace TLCLogin.View
 
         private void cboCourseCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cboCourse.DataSource = null;
+            cboCourse.SelectedIndex = -1;
+
             // fill cbo
             if (cboCourseCategory.SelectedIndex != -1)
             {

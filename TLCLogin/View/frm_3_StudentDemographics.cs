@@ -67,7 +67,7 @@ namespace TLCLogin.View
 
                 // Special Programs
                 chkLstSpecialPrograms.DataSource = Data.TLCLoginDA.GetAllEnabledSpecialPrograms();
-                chkLstSpecialPrograms.DisplayMember = "Display";
+                chkLstSpecialPrograms.DisplayMember = "Name";
                 chkLstSpecialPrograms.ValueMember = "ID";
 
 

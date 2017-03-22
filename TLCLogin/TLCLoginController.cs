@@ -51,7 +51,7 @@ namespace TLCLogin
         {
             bool worked = false;
 
-            if (worked = CreateStudent(id))
+            if (worked = ValidateStudentID(id))
             {
                 try
                 {
@@ -71,39 +71,58 @@ namespace TLCLogin
         }
 
 
-        /// <summary>
-        /// Step 1b: Validates the entered ID, searches the database and registration.csv file for the student
-        /// Assigns this Student object to CurrentStudent
-        /// </summary>
-        /// <param name="id">A string representing a possible student id</param>
-        /// <returns>True if a valid student object was created</returns>
-        public bool CreateStudent(string id)
+        public bool ValidateStudentID(string id)
         {
+
             bool valid = false;
 
             CurrentStudent = new Student();
             try
             {
                 CurrentStudent.StudentID = Convert.ToInt32(id);
-
                 valid = true;
-
-                // get data
-                try
-                {
-                    Student fill = Data.TLCLoginDA.GetStudentByID(CurrentStudent.StudentID);
-                    if (fill != null) CurrentStudent = fill;
-                }
-                catch
-                {
-                    throw;
-                }
             }
             catch (FormatException)
             {
                 throw new FormatException("Enter only numbers in the student ID.");
             }
             return valid;
+        }
+
+        /// <summary>
+        /// Step 1b: Validates the entered ID, searches the database and registration.csv file for the student
+        /// Assigns this Student object to CurrentStudent
+        /// </summary>
+        /// <param name="id">A string representing a possible student id</param>
+        /// <returns>True if student already exists, false if new</returns>
+        public bool CreateStudent(int id)
+        {
+            bool studentExistsInDB = false;
+            CurrentStudent.StudentID = id;
+            
+            // get data
+            try
+            {
+                // try from database
+                Student fill = Data.TLCLoginDA.GetStudentByID(CurrentStudent.StudentID);
+                    
+                // if the student was not found in the database (ie, they have not logged in yet this quarter)
+                // then search the file for them
+                if (fill != null)
+                {
+                    studentExistsInDB = true;
+                }
+                else
+                {
+                    fill = Data.StudentFileReader.GetStudentByID(CurrentStudent.StudentID);
+                }
+
+                // if fill is valid student, assign it to CurrentStudent - otherwise keep CurrentStudent as obj with StudentID
+                if (fill != null) CurrentStudent = fill;
+            }
+            catch { throw; }
+
+            return studentExistsInDB;
         }
 
         /// <summary>

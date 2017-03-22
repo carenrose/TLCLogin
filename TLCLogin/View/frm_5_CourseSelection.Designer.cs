@@ -41,7 +41,7 @@
             // 
             this.lblSubjectHeader.AutoSize = true;
             this.lblSubjectHeader.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubjectHeader.Location = new System.Drawing.Point(192, 25);
+            this.lblSubjectHeader.Location = new System.Drawing.Point(256, 25);
             this.lblSubjectHeader.Name = "lblSubjectHeader";
             this.lblSubjectHeader.Size = new System.Drawing.Size(150, 30);
             this.lblSubjectHeader.TabIndex = 0;
@@ -50,7 +50,7 @@
             // btnContinue
             // 
             this.btnContinue.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContinue.Location = new System.Drawing.Point(359, 345);
+            this.btnContinue.Location = new System.Drawing.Point(496, 345);
             this.btnContinue.Name = "btnContinue";
             this.btnContinue.Size = new System.Drawing.Size(155, 41);
             this.btnContinue.TabIndex = 7;
@@ -78,7 +78,7 @@
             this.cboCourse.Location = new System.Drawing.Point(41, 225);
             this.cboCourse.MaxDropDownItems = 12;
             this.cboCourse.Name = "cboCourse";
-            this.cboCourse.Size = new System.Drawing.Size(453, 29);
+            this.cboCourse.Size = new System.Drawing.Size(610, 29);
             this.cboCourse.TabIndex = 10;
             // 
             // cboCourseCategory
@@ -89,7 +89,7 @@
             this.cboCourseCategory.Location = new System.Drawing.Point(41, 119);
             this.cboCourseCategory.MaxDropDownItems = 12;
             this.cboCourseCategory.Name = "cboCourseCategory";
-            this.cboCourseCategory.Size = new System.Drawing.Size(453, 29);
+            this.cboCourseCategory.Size = new System.Drawing.Size(610, 29);
             this.cboCourseCategory.TabIndex = 11;
             this.cboCourseCategory.SelectedIndexChanged += new System.EventHandler(this.cboCourseCategory_SelectedIndexChanged);
             // 
@@ -118,7 +118,7 @@
             this.AcceptButton = this.btnContinue;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 398);
+            this.ClientSize = new System.Drawing.Size(663, 398);
             this.Controls.Add(this.cboCourse);
             this.Controls.Add(this.cboCourseCategory);
             this.Controls.Add(this.label7);

@@ -124,6 +124,15 @@ namespace TLCLogin.Data {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Student_StudentService_Past.
+        /// </summary>
+        internal static string PastStuServices {
+            get {
+                return ResourceManager.GetString("PastStuServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ProgramsOfStudy.
         /// </summary>
         internal static string ProgramOfStudy {
