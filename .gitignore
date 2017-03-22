@@ -1,0 +1,36 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+
+# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)		[Bb]in/
+[Oo]bj/
+
+# NuGet Packages Directory
+packages
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.log
+*.vspscc
+*.vssscc
+.builds
