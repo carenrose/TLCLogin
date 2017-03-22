@@ -19,6 +19,12 @@ namespace TLCLogin.View
             this.random = new Random();
             currentStep = 0;
             InitializeComponent();
+
+            //if (! this.menuStrip1.Items.Contains(exitToolStripMenuItem))
+            //    this.menuStrip1.Items.Add(exitToolStripMenuItem);
+
+            //if (! this.menuStrip1.Items.Contains(adminToolStripMenuItem))
+            //    this.menuStrip1.Items.Add(adminToolStripMenuItem);
         }
         
         /// <summary>
@@ -121,9 +127,18 @@ namespace TLCLogin.View
                 case 2:
                     if (Controller.CurrentStudent != null)
                     {
-                        // log in
-                        frm = new frmStudentDemographics();
-                        ((frmStudentDemographics)frm).Student = Controller.CurrentStudent;
+                        if (Controller.CreateStudent(Controller.CurrentStudent.StudentID))
+                        {
+                            // if in db already, go to next screen
+                            currentStep++;
+                            GoToNextScreen();
+                        }
+                        else
+                        {
+                            // else go to demographics screen
+                            frm = new frmStudentDemographics();
+                            ((frmStudentDemographics)frm).Student = Controller.CurrentStudent;
+                        }
                     }
                     else
                     {
@@ -361,7 +376,14 @@ namespace TLCLogin.View
             }
         }
 
-        #endregion
+        private void createBackupOfDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fbdBackupDirectoryChooser.SelectedPath = AppDomain.CurrentDomain.GetData("DataDirectory").ToString();
+            DialogResult dr = fbdBackupDirectoryChooser.ShowDialog();
 
+            MessageBox.Show(dr.ToString());
+        }
+
+        #endregion
     }
 }

@@ -41,11 +41,17 @@
             this.editSpecialProgramsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeLogoutSurveyFrequencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fbdBackupDirectoryChooser = new System.Windows.Forms.FolderBrowserDialog();
+            this.createBackupOfDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem,
+            this.adminToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(284, 24);
@@ -60,9 +66,6 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.exitToolStripMenuItem.Text = "Exit";
-
-            this.menuStrip1.Items.Add(this.exitToolStripMenuItem);
-
             // 
             // closeCenterToolStripMenuItem
             // 
@@ -82,11 +85,11 @@
             this.addRemoveAdminToolStripMenuItem,
             this.viewLogonsToolStripMenuItem,
             this.viewStudentsHoursThisWeekToolStripMenuItem,
-            this.manageOptionsToolStripMenuItem});
+            this.manageOptionsToolStripMenuItem,
+            this.createBackupOfDatabaseToolStripMenuItem});
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
             this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.adminToolStripMenuItem.Text = "Admin";
-            this.menuStrip1.Items.Add(this.adminToolStripMenuItem);
             // 
             // addRemoveAdminToolStripMenuItem
             // 
@@ -149,6 +152,17 @@
             this.changeToolStripMenuItem.Text = "Change Program Close Password";
             this.changeToolStripMenuItem.Click += new System.EventHandler(this.changeByePasswordToolStripMenuItem_Click);
             // 
+            // createBackupOfDatabaseToolStripMenuItem
+            // 
+            this.createBackupOfDatabaseToolStripMenuItem.Name = "createBackupOfDatabaseToolStripMenuItem";
+            this.createBackupOfDatabaseToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.createBackupOfDatabaseToolStripMenuItem.Text = "Create Backup Of Database";
+            this.createBackupOfDatabaseToolStripMenuItem.Click += new System.EventHandler(this.createBackupOfDatabaseToolStripMenuItem_Click);
+            // 
+            // folderBrowserDialog1
+            // 
+            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            // 
             // frmMdiContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -193,6 +207,9 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeCenterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog fbdBackupDirectoryChooser;
+        private System.Windows.Forms.ToolStripMenuItem createBackupOfDatabaseToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 
