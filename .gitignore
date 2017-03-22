@@ -1,8 +1,5 @@
 # Add any directories, files, or patterns you don't want to be tracked by version control
 
-# Build Folders
-[Oo]bj/
-
 # NuGet Packages Directory
 packages
 
@@ -11,12 +8,18 @@ packages
 *.user
 *.sln.docstates
 
+# Build Folders
+# [Bb]in/
+[Oo]bj/
+
 # Build results
-[Dd]ebug/
+#[Dd]ebug/
 [Rr]elease/
 x64/
 *_i.c
 *_p.c
+*.exe
+*.exe.config
 *.ilk
 *.meta
 *.obj
