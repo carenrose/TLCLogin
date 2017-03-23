@@ -125,6 +125,12 @@
     <Compile Include="View\Admin\frmAdminSurveyFrequency.Designer.cs">
       <DependentUpon>frmAdminSurveyFrequency.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Admin\frmAdminSurveyWhereHeard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Admin\frmAdminSurveyWhereHeard.Designer.cs">
+      <DependentUpon>frmAdminSurveyWhereHeard.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Admin\frmAdminViewLogins.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +226,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Admin\frmAdminSurveyFrequency.resx">
       <DependentUpon>frmAdminSurveyFrequency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Admin\frmAdminSurveyWhereHeard.resx">
+      <DependentUpon>frmAdminSurveyWhereHeard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Admin\frmAdminViewLogins.resx">
       <DependentUpon>frmAdminViewLogins.cs</DependentUpon>

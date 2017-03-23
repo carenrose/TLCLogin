@@ -167,5 +167,14 @@ namespace TLCLogin.Data {
                 return ResourceManager.GetString("StuServiceProgram", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Survey_HearAbout.
+        /// </summary>
+        internal static string SurveyAdReasons {
+            get {
+                return ResourceManager.GetString("SurveyAdReasons", resourceCulture);
+            }
+        }
     }
 }

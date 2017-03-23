@@ -431,6 +431,17 @@ namespace TLCLogin.View
             FileSystem.CopyFile(dir + origFilename, saved);
         }
 
+        private void editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // prompt password - admin
+            if (PromptForPassword(true))
+            {
+                Admin.frmAdminSurveyWhereHeard frm = new Admin.frmAdminSurveyWhereHeard();
+                frm.PseudoParent = this;
+                frm.ShowDialog();
+            }
+        }
+
         #endregion
     }
 }

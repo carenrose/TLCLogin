@@ -42,9 +42,8 @@
             this.changeLogoutSurveyFrequencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createBackupOfDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fbdBackupDirectoryChooser = new System.Windows.Forms.FolderBrowserDialog();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.sfdDatabaseBackup = new System.Windows.Forms.SaveFileDialog();
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,6 +78,7 @@
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.quitToolStripMenuItem.Text = "Exit Program";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // adminToolStripMenuItem
             // 
@@ -119,6 +119,7 @@
             this.manageOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
             this.editSpecialProgramsToolStripMenuItem,
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem,
             this.changeLogoutSurveyFrequencyToolStripMenuItem,
             this.changeToolStripMenuItem});
             this.manageOptionsToolStripMenuItem.Name = "manageOptionsToolStripMenuItem";
@@ -160,13 +161,16 @@
             this.createBackupOfDatabaseToolStripMenuItem.Text = "Create Backup Of Database";
             this.createBackupOfDatabaseToolStripMenuItem.Click += new System.EventHandler(this.createBackupOfDatabaseToolStripMenuItem_Click);
             // 
-            // folderBrowserDialog1
-            // 
-            this.folderBrowserDialog1.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            // 
             // sfdDatabaseBackup
             // 
             this.sfdDatabaseBackup.Title = "Save Backup Of Database";
+            // 
+            // editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem
+            // 
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Name = "editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem";
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Text = "Edit Survey \"Where Did You Hear About Us\" Options";
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Click += new System.EventHandler(this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem_Click);
             // 
             // frmMdiContainer
             // 
@@ -212,10 +216,9 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeCenterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
-        private System.Windows.Forms.FolderBrowserDialog fbdBackupDirectoryChooser;
         private System.Windows.Forms.ToolStripMenuItem createBackupOfDatabaseToolStripMenuItem;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.SaveFileDialog sfdDatabaseBackup;
+        private System.Windows.Forms.ToolStripMenuItem editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem;
     }
 }
 

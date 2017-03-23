@@ -153,4 +153,7 @@
   <data name="PastStuServices" xml:space="preserve">
     <value>Student_StudentService_Past</value>
   </data>
+  <data name="SurveyAdReasons" xml:space="preserve">
+    <value>Survey_HearAbout</value>
+  </data>
 </root>

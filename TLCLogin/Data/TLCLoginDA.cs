@@ -324,6 +324,35 @@ namespace TLCLogin.Data
             return prog;
         }
 
+        public static bool IsFirstTimeStudent(int id)
+        {
+            bool firstTime = true;
+            OleDbConnection conn = null;
+            try
+            {
+                conn = LoginDB.GetConnection();
+                string sql = "SELECT COUNT(*) FROM " + DBSchemaTables.LoginHistory + " " +
+                             "WHERE StudentID = @stuid";
+
+                OleDbCommand cmd = new OleDbCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@stuid", id);
+
+                conn.Open();
+                firstTime = ((int)cmd.ExecuteScalar() <= 1);     // because this is used after one login
+            }
+            catch (Exception ex) when (ex is OleDbException || ex is InvalidOperationException)
+            {
+                LoginDB.PrettifyAndLogException(ex, ErrorMessagePart + "checking for student info");
+            }
+            finally
+            {
+                if (conn != null) conn.Close();
+            }
+
+            return firstTime;
+        }
+
+
         #endregion
 
         #region StudentLogins
@@ -509,8 +538,8 @@ namespace TLCLogin.Data
 
                 conn = LoginDB.GetConnection();
                 string sql = "INSERT INTO " + DBSchemaTables.LoginHistory + " " +
-                             "(StudentID, Campus, AreaOfAssistance, CourseCategory, CourseNumber, LogInTime) " +
-                             "VALUES (@stu, @cam, @aoa, NULL, NULL, @tim)";
+                             "(StudentID, Campus, AreaOfAssistance, CourseCategory, CourseNumber, LogInTime, SurveyHearAbout) " +
+                             "VALUES (@stu, @cam, @aoa, NULL, NULL, @tim, NULL)";
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@stu", login.Student.StudentID);
                 cmd.Parameters.AddWithValue("@cam", campusID);
@@ -626,19 +655,49 @@ namespace TLCLogin.Data
             }
         }
 
-        public static void UpdateLoginWithSurvey(Login login, int numStars)
+        public static void UpdateLoginWithSurvey(Login login, int numStars = -1, int adPlaceID = -1)
         {
             OleDbConnection conn = null;
 
             try
             {
                 conn = LoginDB.GetConnection();
+                OleDbCommand cmd = new OleDbCommand();
+                cmd.Connection = conn;
 
-                string sql = "UPDATE " + DBSchemaTables.LoginHistory + " " +
-                             "SET SurveyRating = @star " +
-                             "WHERE HistoryID = @id";
-                OleDbCommand cmd = new OleDbCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@time", numStars);
+                if (numStars > -1 && adPlaceID > -1)
+                {
+                    // both
+                    cmd.CommandText =
+                        "UPDATE " + DBSchemaTables.LoginHistory + " " + 
+                        "SET SurveyRating = @star, SurveyHearAbout = @ad ";
+                    cmd.Parameters.AddWithValue("@star", numStars);
+                    cmd.Parameters.AddWithValue("@ad", adPlaceID);
+                }
+                else if (numStars > -1)
+                {
+                    // only stars
+                    cmd.CommandText =
+                        "UPDATE " + DBSchemaTables.LoginHistory + " " +
+                        "SET SurveyRating = @star ";
+                    cmd.Parameters.AddWithValue("@star", numStars);
+                }
+                else if (adPlaceID > -1)
+                {
+                    // only heard about
+                    cmd.CommandText =
+                        "UPDATE " + DBSchemaTables.LoginHistory + " " +
+                        "SET SurveyHearAbout = @ad ";
+                    cmd.Parameters.AddWithValue("@ad", adPlaceID);
+                }
+                else
+                {
+                    // what are we saving then?
+                    return;
+                }
+
+                // works because this is last in statement
+                cmd.CommandText += "WHERE HistoryID = @id";
                 cmd.Parameters.AddWithValue("@id", login.ID);
 
                 conn.Open();
@@ -1109,6 +1168,60 @@ namespace TLCLogin.Data
             return hours;
         }
 
+
+        public static void AddSurveyWhereFound(string found)
+        {
+            OleDbConnection conn = null;
+
+            try
+            {
+                conn = LoginDB.GetConnection();
+                string sql = "INSERT INTO " + DBSchemaTables.SurveyAdReasons + " (HowHeard) " +
+                             "VALUES (@val)";
+
+                OleDbCommand cmd = new OleDbCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@val", found);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex) when (ex is OleDbException || ex is InvalidOperationException)
+            {
+                LoginDB.PrettifyAndLogException(ex, ErrorMessagePart + "disabling the Student Service", false);
+            }
+            finally
+            {
+                if (conn != null) conn.Close();
+            }
+        }
+
+        public static void UpdateSurveyWhereFound(int id, string newname)
+        {
+            OleDbConnection conn = null;
+
+            try
+            {
+                conn = LoginDB.GetConnection();
+                string sql = "UPDATE " + DBSchemaTables.SurveyAdReasons + " " +
+                             "SET HowHeard = @n WHERE ID = @id";
+
+                OleDbCommand cmd = new OleDbCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@n", newname);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex) when (ex is OleDbException || ex is InvalidOperationException)
+            {
+                LoginDB.PrettifyAndLogException(ex, ErrorMessagePart + "disabling the Student Service", false);
+            }
+            finally
+            {
+                if (conn != null) conn.Close();
+            }
+        }
+
         #endregion
 
         #region Miscellaneous Data
@@ -1368,8 +1481,14 @@ namespace TLCLogin.Data
         {
             return GetAllOfTypeString(DBSchemaTables.CourseCategory, "CategoryCode", "CategoryName", "course categories");
         }
-        
-        
+
+        // all survey how did you hear about us reasons
+        public static Dictionary<int, string> GetAllSurveyAdPlaces()
+        {
+            return GetAllOfType(DBSchemaTables.SurveyAdReasons, "ID", "HowHeard", "survey advertising places");
+        }
+
+
 
         // all of type (integer id)
         private static Dictionary<int, string> GetAllOfType(string tableName, string idColumn, string nameColumn, string readableDescription)

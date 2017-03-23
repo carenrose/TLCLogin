@@ -16,60 +16,76 @@ namespace TLCLogin.View
         private Timer Timer { get; set; }
         private int countdown;
         private frmMdiContainer parent;
-
+        private int starsClicked;
 
         public frmLogoffSurvey()
         {
             InitializeComponent();
-
-            countdown = 30;
-            this.Timer = new Timer();
-            Timer.Interval = 1000;
-            Timer.Tick += new EventHandler(timer_Tick);
-            Timer.Start();
         }
 
         private void frmLogoffSurvey_Load(object sender, EventArgs e)
         {
             parent = (frmMdiContainer)this.MdiParent;
-
-            lblCountdown.Text = countdown.ToString();
-
+            
+            // star buttons
             starBtns = new Button[5];
             starBtns[0] = btn1star;
             starBtns[1] = btn2stars;
             starBtns[2] = btn3stars;
             starBtns[3] = btn4stars;
             starBtns[4] = btn5stars;
+            starsClicked = -1;
+
+            // if first visit (this quarter)
+            if (parent.Controller.CurrentLogin != null && parent.Controller.CurrentLogin.Student != null &&
+                Data.TLCLoginDA.IsFirstTimeStudent(parent.Controller.CurrentLogin.Student.StudentID)) {
+
+                pnlHowHeard.Visible = true;
+
+                cboHeardAbout.DataSource = Data.TLCLoginDA.GetAllSurveyAdPlaces()
+                    .Select(kv => new { Key = kv.Key, Value = kv.Value }).ToArray();
+                cboHeardAbout.ValueMember = "Key";
+                cboHeardAbout.DisplayMember = "Value";
+            }
+
+            // countdown timer
+            countdown = 30;
+            this.Timer = new Timer();
+            Timer.Interval = 1000;
+            Timer.Tick += new EventHandler(timer_Tick);
+            Timer.Start();
+            lblCountdown.Text = countdown.ToString();
         }
         
         protected void ButtonMouseHover(object sender, EventArgs e)
         {
-            Button s = (Button)sender;
-            for (int i = 0; i < Convert.ToInt16(s.Tag); i++)
+            if (starsClicked == -1)
             {
-                starBtns[i].BackgroundImage = Properties.Resources.star_yellow;
+                Button s = (Button)sender;
+                for (int i = 0; i < Convert.ToInt16(s.Tag); i++)
+                {
+                    starBtns[i].BackgroundImage = Properties.Resources.star_yellow;
+                }
             }
         }
 
         protected void ButtonMouseLeave(object sender, EventArgs e)
         {
-            foreach (Button b in starBtns)
+            if (starsClicked == -1)
             {
-                b.BackgroundImage = Properties.Resources.star_grey;
+                foreach (Button b in starBtns)
+                {
+                    b.BackgroundImage = Properties.Resources.star_grey;
+                }
             }
         }
 
-        protected void ButtonClick(object sender, EventArgs e)
+        protected void StarButtonClick(object sender, EventArgs e)
         {
+            starsClicked = -1;
             Button s = (Button)sender;
-            int stars = Convert.ToInt16(s.Tag);
-
-            // do 
-            parent.Controller.Survey(stars);
-
-            // then close
-            this.btnNope.PerformClick();
+            ButtonMouseHover(sender, e);
+            starsClicked = Convert.ToInt16(s.Tag);
         }
         
 
@@ -86,6 +102,19 @@ namespace TLCLogin.View
             {
                 this.btnNope.PerformClick();
             }
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            int adplace = (cboHeardAbout.SelectedIndex > -1) ?
+                Convert.ToInt16(cboHeardAbout.SelectedValue) :
+                -1;
+            
+            // do 
+            parent.Controller.Survey(starsClicked, adplace);
+            
+            // then close
+            this.btnNope.PerformClick();
         }
     }
 }

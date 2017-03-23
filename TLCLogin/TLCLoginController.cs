@@ -210,11 +210,11 @@ namespace TLCLogin
             }
         }
 
-        public void Survey(int starsClicked)
+        public void Survey(int starsClicked, int heardAbout)
         {
             if (CurrentLogin != null)
             {
-                Data.TLCLoginDA.UpdateLoginWithSurvey(CurrentLogin, starsClicked);
+                Data.TLCLoginDA.UpdateLoginWithSurvey(CurrentLogin, starsClicked, heardAbout);
             }
         }
 

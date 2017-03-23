@@ -98,6 +98,7 @@ namespace TLCLogin.View
         {
             txtPassword.Clear();
             lblError.Visible = true;
+            if (Control.IsKeyLocked(Keys.CapsLock)) lblInstructions.Text = "Caps Lock is on.";
             txtUser.Focus();
         }
     }
