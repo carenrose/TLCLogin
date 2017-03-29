@@ -1,4 +1,22 @@
-﻿using System;
+﻿/* Copyright (C) 2017 Brianna Williams
+ *
+ * This file is part of TLC Login.
+ * 
+ * TLC Login is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * TLC Login is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with TLC Login.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,40 +32,12 @@ namespace TLCLogin.Data
         
         // Column order: STUDENT,	ACTIVE PGM,	LAST NAME,	FIRST NAME
         
-        public static List<Business.Student> GetAllStudents()
+
+        public static bool RegistrationFileExists()
         {
-            StreamReader sr = null;
-            List<Business.Student> students = null;
-
-            try
-            {   
-                sr = new StreamReader(filePath);
-                students = new List<Business.Student>();
-
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] lineItems = line.Split(',');
-                    Business.Student s = new Business.Student();
-                    s.StudentID = Convert.ToInt32(lineItems[0]);
-                    s.ProgramOfStudy = ParseProgramOfStudy(lineItems[1]);
-                    s.LastName = lineItems[2];
-                    s.FirstName = lineItems[3];
-
-                    students.Add(s);
-                }
-            }
-            catch (IOException e)
-            {
-                LoginDB.PrettifyAndLogException(e, "getting data from the registration file");
-            }
-            finally
-            {
-                if (sr != null) sr.Close();
-            }
-
-            return students;
+            return File.Exists(filePath);
         }
+
 
         public static Business.Student GetStudentByID(int id)
         {
@@ -64,17 +54,20 @@ namespace TLCLogin.Data
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] lineItems = line.Split(',');
-                    int lineID = Convert.ToInt32(lineItems[0]);
 
-                    if (lineID == id)
+                    int lineID;
+                    if (Int32.TryParse(lineItems[0], out lineID))
                     {
-                        student = new Business.Student();
-                        student.StudentID = lineID;
-                        student.ProgramOfStudy = ParseProgramOfStudy(lineItems[1]);
-                        student.LastName = lineItems[2];
-                        student.FirstName = lineItems[3];
+                        if (lineID == id)
+                        {
+                            student = new Business.Student();
+                            student.StudentID = lineID;
+                            student.ProgramOfStudy = ParseProgramOfStudy(lineItems[1]);
+                            student.LastName = lineItems[2];
+                            student.FirstName = lineItems[3];
 
-                        break;
+                            break;
+                        }
                     }
                 }
             }

@@ -1,47 +1,5 @@
-Date: 3/13/2017 1:30:34 PM
-Message: Cannot open database ''.  It may not be a database that your application recognizes, or the file may be corrupt.
-StackTrace: 
-   at System.Data.OleDb.OleDbConnectionInternal..ctor(OleDbConnectionString constr, OleDbConnection connection)
-   at System.Data.OleDb.OleDbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningObject)
-   at System.Data.ProviderBase.DbConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
-   at System.Data.ProviderBase.DbConnectionFactory.CreateNonPooledConnection(DbConnection owningConnection, DbConnectionPoolGroup poolGroup, DbConnectionOptions userOptions)
-   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
-   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
-   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
-   at System.Data.ProviderBase.DbConnectionInternal.OpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory)
-   at System.Data.OleDb.OleDbConnection.Open()
-   at TLCLogin.Data.TLCLoginDA.GetAllOfTypeString(String tableName, String idColumn, String nameColumn, String readableDescription) in C:\Users\carenrose\OneDrive - Southeast Community College\OOAaD\TLCLogin\TLCLogin\Data\TLCLoginDA.cs:line 967
-
------------------------------------------------------------------------------
-
-Date: 3/21/2017 3:23:29 PM
-Message: The table 'Misc_SurveyFrequency' is already opened exclusively by another user, or it is already open through the user interface and cannot be manipulated programmatically.
-StackTrace: 
-   at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr)
-   at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult)
-   at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object& executeResult)
-   at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult)
-   at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method)
-   at System.Data.OleDb.OleDbCommand.ExecuteScalar()
-   at TLCLogin.Data.TLCLoginDA.GetSurveyFrequencyPercent() in C:\Users\carenrose\OneDrive - Southeast Community College\OOAaD\TLCLogin\TLCLogin\Data\TLCLoginDA.cs:line 933
-
------------------------------------------------------------------------------
-
-Date: 3/21/2017 3:24:39 PM
-Message: The table 'Misc_SurveyFrequency' is already opened exclusively by another user, or it is already open through the user interface and cannot be manipulated programmatically.
-StackTrace: 
-   at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr)
-   at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult)
-   at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object& executeResult)
-   at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult)
-   at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method)
-   at System.Data.OleDb.OleDbCommand.ExecuteScalar()
-   at TLCLogin.Data.TLCLoginDA.GetSurveyFrequencyPercent() in C:\Users\carenrose\OneDrive - Southeast Community College\OOAaD\TLCLogin\TLCLogin\Data\TLCLoginDA.cs:line 933
-
------------------------------------------------------------------------------
-
-Date: 3/21/2017 5:27:30 PM
-Message: Syntax error in UPDATE statement.
+Date: 3/23/2017 1:10:07 PM
+Message: You cannot add or change a record because a related record is required in table 'Survey_HearAbout'.
 StackTrace: 
    at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr)
    at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult)
@@ -49,12 +7,12 @@ StackTrace:
    at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult)
    at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method)
    at System.Data.OleDb.OleDbCommand.ExecuteNonQuery()
-   at TLCLogin.Data.TLCLoginDA.SetByePassword(String pw) in C:\Users\carenrose\OneDrive - Southeast Community College\OOAaD\TLCLogin\TLCLogin\Data\TLCLoginDA.cs:line 1122
+   at TLCLogin.Data.TLCLoginDA.AddLogin(Login login, Int32 campusID) in C:\Users\carenrose\OneDrive - Southeast Community College\OOAaD\TLCLogin\TLCLogin\Data\TLCLoginDA.cs:line 550
 
 -----------------------------------------------------------------------------
 
-Date: 3/21/2017 5:28:43 PM
-Message: Syntax error in UPDATE statement.
+Date: 3/29/2017 3:06:28 PM
+Message: No value given for one or more required parameters.
 StackTrace: 
    at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr)
    at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult)
@@ -62,12 +20,12 @@ StackTrace:
    at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult)
    at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method)
    at System.Data.OleDb.OleDbCommand.ExecuteNonQuery()
-   at TLCLogin.Data.TLCLoginDA.SetByePassword(String pw)
+   at TLCLogin.Data.TLCLoginDA.UpdateAreaOfAssistance(AreaOfAssistance area)
 
 -----------------------------------------------------------------------------
 
-Date: 3/21/2017 5:32:53 PM
-Message: Syntax error in UPDATE statement.
+Date: 3/29/2017 3:06:53 PM
+Message: No value given for one or more required parameters.
 StackTrace: 
    at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr)
    at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult)
@@ -75,12 +33,12 @@ StackTrace:
    at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult)
    at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method)
    at System.Data.OleDb.OleDbCommand.ExecuteNonQuery()
-   at TLCLogin.Data.TLCLoginDA.SetByePassword(String pw)
+   at TLCLogin.Data.TLCLoginDA.UpdateAreaOfAssistance(AreaOfAssistance area) in C:\Users\carenrose\OneDrive - Southeast Community College\OOAaD\TLCLogin\TLCLogin\Data\TLCLoginDA.cs:line 1030
 
 -----------------------------------------------------------------------------
 
-Date: 3/21/2017 5:33:01 PM
-Message: Syntax error in UPDATE statement.
+Date: 3/29/2017 3:09:55 PM
+Message: No value given for one or more required parameters.
 StackTrace: 
    at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr)
    at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult)
@@ -88,20 +46,7 @@ StackTrace:
    at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult)
    at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method)
    at System.Data.OleDb.OleDbCommand.ExecuteNonQuery()
-   at TLCLogin.Data.TLCLoginDA.SetByePassword(String pw)
-
------------------------------------------------------------------------------
-
-Date: 3/21/2017 5:34:32 PM
-Message: Syntax error in UPDATE statement.
-StackTrace: 
-   at System.Data.OleDb.OleDbCommand.ExecuteCommandTextErrorHandling(OleDbHResult hr)
-   at System.Data.OleDb.OleDbCommand.ExecuteCommandTextForSingleResult(tagDBPARAMS dbParams, Object& executeResult)
-   at System.Data.OleDb.OleDbCommand.ExecuteCommandText(Object& executeResult)
-   at System.Data.OleDb.OleDbCommand.ExecuteCommand(CommandBehavior behavior, Object& executeResult)
-   at System.Data.OleDb.OleDbCommand.ExecuteReaderInternal(CommandBehavior behavior, String method)
-   at System.Data.OleDb.OleDbCommand.ExecuteNonQuery()
-   at TLCLogin.Data.TLCLoginDA.SetByePassword(String pw) in C:\Users\carenrose\OneDrive - Southeast Community College\OOAaD\TLCLogin\TLCLogin\Data\TLCLoginDA.cs:line 1123
+   at TLCLogin.Data.TLCLoginDA.UpdateAreaOfAssistance(AreaOfAssistance area)
 
 -----------------------------------------------------------------------------
 

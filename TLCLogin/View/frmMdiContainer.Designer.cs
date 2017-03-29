@@ -1,4 +1,22 @@
-﻿namespace TLCLogin.View
+﻿/* Copyright (C) 2017 Brianna Williams
+ *
+ * This file is part of TLC Login.
+ * 
+ * TLC Login is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * TLC Login is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with TLC Login.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace TLCLogin.View
 {
     partial class frmMdiContainer
     {
@@ -39,11 +57,11 @@
             this.manageOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editSpecialProgramsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeLogoutSurveyFrequencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createBackupOfDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfdDatabaseBackup = new System.Windows.Forms.SaveFileDialog();
-            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,28 +147,35 @@
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
             this.editToolStripMenuItem.Text = "Edit Categories";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editCategoriesToolStripMenuItem_Click);
             // 
             // editSpecialProgramsToolStripMenuItem
             // 
             this.editSpecialProgramsToolStripMenuItem.Name = "editSpecialProgramsToolStripMenuItem";
-            this.editSpecialProgramsToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.editSpecialProgramsToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
             this.editSpecialProgramsToolStripMenuItem.Text = "Edit Special Programs";
             this.editSpecialProgramsToolStripMenuItem.Click += new System.EventHandler(this.editSpecialProgramsToolStripMenuItem_Click);
+            // 
+            // editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem
+            // 
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Name = "editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem";
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Text = "Edit Survey \"Where Did You Hear About Us\" Options";
+            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Click += new System.EventHandler(this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem_Click);
             // 
             // changeLogoutSurveyFrequencyToolStripMenuItem
             // 
             this.changeLogoutSurveyFrequencyToolStripMenuItem.Name = "changeLogoutSurveyFrequencyToolStripMenuItem";
-            this.changeLogoutSurveyFrequencyToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.changeLogoutSurveyFrequencyToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
             this.changeLogoutSurveyFrequencyToolStripMenuItem.Text = "Change Logout Survey Frequency";
             this.changeLogoutSurveyFrequencyToolStripMenuItem.Click += new System.EventHandler(this.changeLogoutSurveyFrequencyToolStripMenuItem_Click);
             // 
             // changeToolStripMenuItem
             // 
             this.changeToolStripMenuItem.Name = "changeToolStripMenuItem";
-            this.changeToolStripMenuItem.Size = new System.Drawing.Size(252, 22);
+            this.changeToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
             this.changeToolStripMenuItem.Text = "Change Program Close Password";
             this.changeToolStripMenuItem.Click += new System.EventHandler(this.changeByePasswordToolStripMenuItem_Click);
             // 
@@ -165,13 +190,6 @@
             // 
             this.sfdDatabaseBackup.Title = "Save Backup Of Database";
             // 
-            // editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem
-            // 
-            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Name = "editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem";
-            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Text = "Edit Survey \"Where Did You Hear About Us\" Options";
-            this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem.Click += new System.EventHandler(this.editSurveyWhereDidYouHearAboutUsOptionsToolStripMenuItem_Click);
-            // 
             // frmMdiContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,7 +202,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMdiContainer";
             this.ShowIcon = false;
