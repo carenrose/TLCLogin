@@ -90,6 +90,7 @@ namespace TLCLogin.View
             this.closeCenterToolStripMenuItem.Name = "closeCenterToolStripMenuItem";
             this.closeCenterToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.closeCenterToolStripMenuItem.Text = "Close Center For Day";
+            this.closeCenterToolStripMenuItem.Click += new System.EventHandler(this.closeCenterToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 

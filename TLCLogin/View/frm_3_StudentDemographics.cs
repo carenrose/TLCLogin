@@ -64,7 +64,7 @@ namespace TLCLogin.View
                     (kv => new { Key = kv.Key, Value = kv.Value }).ToArray();
                 cboCountryOrigin.ValueMember = "Key";
                 cboCountryOrigin.DisplayMember = "Value";
-                cboCountryOrigin.SelectedIndex = 0;
+                cboCountryOrigin.SelectedIndex = -1;
 
                 index = -1;
 
@@ -81,7 +81,7 @@ namespace TLCLogin.View
                     (kv => new KeyValuePair<int, string>(kv.Key, kv.Value)).ToArray();
                 cboHomeLanguage.ValueMember = "Key";
                 cboHomeLanguage.DisplayMember = "Value";
-                cboHomeLanguage.SelectedIndex = 0;
+                cboHomeLanguage.SelectedIndex = -1;
 
                 // Special Programs
                 chkLstSpecialPrograms.DataSource = Data.TLCLoginDA.GetAllEnabledSpecialPrograms();
@@ -121,6 +121,20 @@ namespace TLCLogin.View
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
+            // validate
+            string missing = "";
+            if (txtFirstName.Text.Length < 1) missing += "First name is required. " + Environment.NewLine;
+            if (txtLastName.Text.Length < 1) missing += "Last name is required. ";
+            if (cboProgramStudy.SelectedIndex == -1) missing += "A program of study must be selected. ";
+            if (cboCountryOrigin.SelectedIndex == -1) missing += "A country must be selected. " + Environment.NewLine;
+            if (cboHomeLanguage.SelectedIndex == -1) missing += "A language must be selected. " + Environment.NewLine;
+
+            if (missing.Length > 0)
+            {
+                parent.ShowMessage("Please fill in all data. " + Environment.NewLine + missing);
+                return;
+            }
+
             // gather form data
             Student.FirstName = txtFirstName.Text;
             Student.LastName = txtLastName.Text;
