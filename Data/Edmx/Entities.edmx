@@ -1,0 +1,823 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataModel.Store" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AreaOfAssistance">
+          <Key>
+            <PropertyRef Name="AreaID" />
+          </Key>
+          <Property Name="AreaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="255" />
+          <Property Name="DefaultLogoffMinutes" Type="int" />
+          <Property Name="SkipsCourseSelection" Type="bit" />
+        </EntityType>
+        <EntityType Name="Credentials">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" />
+          <Property Name="WinLogin" Type="bit" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LKP_Campus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LKP_CountryOfOrigin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LKP_Course">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Category" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="CourseNumber" Type="int" Nullable="false" />
+          <Property Name="CourseTitle" Type="nvarchar" MaxLength="255" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LKP_CourseCategory">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LKP_NativeLanguage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LKP_ProgramOfStudy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LKP_StudentServiceProgram">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LKP_SurveyReferrer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Student" Type="int" Nullable="false" />
+          <Property Name="FK_Campus" Type="int" Nullable="false" />
+          <Property Name="FK_AreaOfAssistance" Type="int" Nullable="false" />
+          <Property Name="FK_Course" Type="int" />
+          <Property Name="LogInTime" Type="datetime" Nullable="false" />
+          <Property Name="LogOutTime" Type="datetime" />
+          <Property Name="SurveyRating" Type="int" />
+          <Property Name="FK_SurveyReferrer" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Misc_SurveyFrequency' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Misc_SurveyFrequency">
+          <Property Name="FrequencyPercent" Type="int" />
+        </EntityType>-->
+        <EntityType Name="REL_Student_StudentService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Student" Type="int" Nullable="false" />
+          <Property Name="FK_Program" Type="int" Nullable="false" />
+          <Property Name="IsCurrent" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FK_NativeLanguage" Type="int" />
+          <Property Name="FK_CountryOfOrigin" Type="int" />
+          <Property Name="FK_ProgramOfStudy" Type="int" />
+        </EntityType>
+        <Association Name="FK_Course_Category">
+          <End Role="LKP_CourseCategory" Type="Self.LKP_CourseCategory" Multiplicity="1" />
+          <End Role="LKP_Course" Type="Self.LKP_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_CourseCategory">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="LKP_Course">
+              <PropertyRef Name="FK_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_AoA">
+          <End Role="AreaOfAssistance" Type="Self.AreaOfAssistance" Multiplicity="1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaOfAssistance">
+              <PropertyRef Name="AreaID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="FK_AreaOfAssistance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Campus">
+          <End Role="LKP_Campus" Type="Self.LKP_Campus" Multiplicity="1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_Campus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="FK_Campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Course">
+          <End Role="LKP_Course" Type="Self.LKP_Course" Multiplicity="0..1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_Course">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="FK_Course" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="FK_Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Survey_HearAbout">
+          <End Role="LKP_SurveyReferrer" Type="Self.LKP_SurveyReferrer" Multiplicity="0..1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_SurveyReferrer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="FK_SurveyReferrer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REL_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="REL_Student_StudentService" Type="Self.REL_Student_StudentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="REL_Student_StudentService">
+              <PropertyRef Name="FK_Program" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REL_StudentService">
+          <End Role="LKP_StudentServiceProgram" Type="Self.LKP_StudentServiceProgram" Multiplicity="1" />
+          <End Role="REL_Student_StudentService" Type="Self.REL_Student_StudentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_StudentServiceProgram">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="REL_Student_StudentService">
+              <PropertyRef Name="FK_Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Country">
+          <End Role="LKP_CountryOfOrigin" Type="Self.LKP_CountryOfOrigin" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_CountryOfOrigin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="FK_CountryOfOrigin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Language">
+          <End Role="LKP_NativeLanguage" Type="Self.LKP_NativeLanguage" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_NativeLanguage">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="FK_NativeLanguage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Program">
+          <End Role="LKP_ProgramOfStudy" Type="Self.LKP_ProgramOfStudy" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_ProgramOfStudy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="FK_ProgramOfStudy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataModelStoreContainer">
+          <EntitySet Name="AreaOfAssistance" EntityType="Self.AreaOfAssistance" store:Type="Tables" />
+          <EntitySet Name="Credentials" EntityType="Self.Credentials" store:Type="Tables" />
+          <EntitySet Name="LKP_Campus" EntityType="Self.LKP_Campus" store:Type="Tables" />
+          <EntitySet Name="LKP_CountryOfOrigin" EntityType="Self.LKP_CountryOfOrigin" store:Type="Tables" />
+          <EntitySet Name="LKP_Course" EntityType="Self.LKP_Course" store:Type="Tables" />
+          <EntitySet Name="LKP_CourseCategory" EntityType="Self.LKP_CourseCategory" store:Type="Tables" />
+          <EntitySet Name="LKP_NativeLanguage" EntityType="Self.LKP_NativeLanguage" store:Type="Tables" />
+          <EntitySet Name="LKP_ProgramOfStudy" EntityType="Self.LKP_ProgramOfStudy" store:Type="Tables" />
+          <EntitySet Name="LKP_StudentServiceProgram" EntityType="Self.LKP_StudentServiceProgram" store:Type="Tables" />
+          <EntitySet Name="LKP_SurveyReferrer" EntityType="Self.LKP_SurveyReferrer" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" store:Type="Tables" />
+          <EntitySet Name="REL_Student_StudentService" EntityType="Self.REL_Student_StudentService" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" store:Type="Tables" />
+          <AssociationSet Name="FK_Course_Category" Association="Self.FK_Course_Category">
+            <End Role="LKP_CourseCategory" EntitySet="LKP_CourseCategory" />
+            <End Role="LKP_Course" EntitySet="LKP_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_AoA" Association="Self.FK_Login_AoA">
+            <End Role="AreaOfAssistance" EntitySet="AreaOfAssistance" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Campus" Association="Self.FK_Login_Campus">
+            <End Role="LKP_Campus" EntitySet="LKP_Campus" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Course" Association="Self.FK_Login_Course">
+            <End Role="LKP_Course" EntitySet="LKP_Course" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Student" Association="Self.FK_Login_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Survey_HearAbout" Association="Self.FK_Login_Survey_HearAbout">
+            <End Role="LKP_SurveyReferrer" EntitySet="LKP_SurveyReferrer" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REL_Student" Association="Self.FK_REL_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="REL_Student_StudentService" EntitySet="REL_Student_StudentService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REL_StudentService" Association="Self.FK_REL_StudentService">
+            <End Role="LKP_StudentServiceProgram" EntitySet="LKP_StudentServiceProgram" />
+            <End Role="REL_Student_StudentService" EntitySet="REL_Student_StudentService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Country" Association="Self.FK_Student_Country">
+            <End Role="LKP_CountryOfOrigin" EntitySet="LKP_CountryOfOrigin" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Language" Association="Self.FK_Student_Language">
+            <End Role="LKP_NativeLanguage" EntitySet="LKP_NativeLanguage" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Program" Association="Self.FK_Student_Program">
+            <End Role="LKP_ProgramOfStudy" EntitySet="LKP_ProgramOfStudy" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AreaOfAssistance" EntityType="DataModel.AreaOfAssistance" />
+          <EntitySet Name="Credentials" EntityType="DataModel.Credentials" />
+          <EntitySet Name="LKP_Campus" EntityType="DataModel.LKP_Campus" />
+          <EntitySet Name="LKP_CountryOfOrigin" EntityType="DataModel.LKP_CountryOfOrigin" />
+          <EntitySet Name="LKP_Course" EntityType="DataModel.LKP_Course" />
+          <EntitySet Name="LKP_CourseCategory" EntityType="DataModel.LKP_CourseCategory" />
+          <EntitySet Name="LKP_NativeLanguage" EntityType="DataModel.LKP_NativeLanguage" />
+          <EntitySet Name="LKP_ProgramOfStudy" EntityType="DataModel.LKP_ProgramOfStudy" />
+          <EntitySet Name="LKP_StudentServiceProgram" EntityType="DataModel.LKP_StudentServiceProgram" />
+          <EntitySet Name="LKP_SurveyReferrer" EntityType="DataModel.LKP_SurveyReferrer" />
+          <EntitySet Name="Login" EntityType="DataModel.Login" />
+          <EntitySet Name="REL_Student_StudentService" EntityType="DataModel.REL_Student_StudentService" />
+          <EntitySet Name="Student" EntityType="DataModel.Student" />
+          <AssociationSet Name="FK_Login_AoA" Association="DataModel.FK_Login_AoA">
+            <End Role="AreaOfAssistance" EntitySet="AreaOfAssistance" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Campus" Association="DataModel.FK_Login_Campus">
+            <End Role="LKP_Campus" EntitySet="LKP_Campus" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Country" Association="DataModel.FK_Student_Country">
+            <End Role="LKP_CountryOfOrigin" EntitySet="LKP_CountryOfOrigin" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Category" Association="DataModel.FK_Course_Category">
+            <End Role="LKP_CourseCategory" EntitySet="LKP_CourseCategory" />
+            <End Role="LKP_Course" EntitySet="LKP_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Course" Association="DataModel.FK_Login_Course">
+            <End Role="LKP_Course" EntitySet="LKP_Course" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Language" Association="DataModel.FK_Student_Language">
+            <End Role="LKP_NativeLanguage" EntitySet="LKP_NativeLanguage" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Program" Association="DataModel.FK_Student_Program">
+            <End Role="LKP_ProgramOfStudy" EntitySet="LKP_ProgramOfStudy" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REL_StudentService" Association="DataModel.FK_REL_StudentService">
+            <End Role="LKP_StudentServiceProgram" EntitySet="LKP_StudentServiceProgram" />
+            <End Role="REL_Student_StudentService" EntitySet="REL_Student_StudentService" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Survey_HearAbout" Association="DataModel.FK_Login_Survey_HearAbout">
+            <End Role="LKP_SurveyReferrer" EntitySet="LKP_SurveyReferrer" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Student" Association="DataModel.FK_Login_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REL_Student" Association="DataModel.FK_REL_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="REL_Student_StudentService" EntitySet="REL_Student_StudentService" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AreaOfAssistance">
+          <Key>
+            <PropertyRef Name="AreaID" />
+          </Key>
+          <Property Name="AreaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AreaName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultLogoffMinutes" Type="Int32" />
+          <Property Name="SkipsCourseSelection" Type="Boolean" />
+          <NavigationProperty Name="Login" Relationship="DataModel.FK_Login_AoA" FromRole="AreaOfAssistance" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Credentials">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WinLogin" Type="Boolean" Nullable="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LKP_Campus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Login" Relationship="DataModel.FK_Login_Campus" FromRole="LKP_Campus" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="LKP_CountryOfOrigin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="DataModel.FK_Student_Country" FromRole="LKP_CountryOfOrigin" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="LKP_Course">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Category" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="CourseNumber" Type="Int32" Nullable="false" />
+          <Property Name="CourseTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LKP_CourseCategory" Relationship="DataModel.FK_Course_Category" FromRole="LKP_Course" ToRole="LKP_CourseCategory" />
+          <NavigationProperty Name="Login" Relationship="DataModel.FK_Login_Course" FromRole="LKP_Course" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="LKP_CourseCategory">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LKP_Course" Relationship="DataModel.FK_Course_Category" FromRole="LKP_CourseCategory" ToRole="LKP_Course" />
+        </EntityType>
+        <EntityType Name="LKP_NativeLanguage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="DataModel.FK_Student_Language" FromRole="LKP_NativeLanguage" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="LKP_ProgramOfStudy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="DataModel.FK_Student_Program" FromRole="LKP_ProgramOfStudy" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="LKP_StudentServiceProgram">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="REL_Student_StudentService" Relationship="DataModel.FK_REL_StudentService" FromRole="LKP_StudentServiceProgram" ToRole="REL_Student_StudentService" />
+        </EntityType>
+        <EntityType Name="LKP_SurveyReferrer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Login" Relationship="DataModel.FK_Login_Survey_HearAbout" FromRole="LKP_SurveyReferrer" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Student" Type="Int32" Nullable="false" />
+          <Property Name="FK_Campus" Type="Int32" Nullable="false" />
+          <Property Name="FK_AreaOfAssistance" Type="Int32" Nullable="false" />
+          <Property Name="FK_Course" Type="Int32" />
+          <Property Name="LogInTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LogOutTime" Type="DateTime" Precision="3" />
+          <Property Name="SurveyRating" Type="Int32" />
+          <Property Name="FK_SurveyReferrer" Type="Int32" />
+          <NavigationProperty Name="AreaOfAssistance" Relationship="DataModel.FK_Login_AoA" FromRole="Login" ToRole="AreaOfAssistance" />
+          <NavigationProperty Name="LKP_Campus" Relationship="DataModel.FK_Login_Campus" FromRole="Login" ToRole="LKP_Campus" />
+          <NavigationProperty Name="LKP_Course" Relationship="DataModel.FK_Login_Course" FromRole="Login" ToRole="LKP_Course" />
+          <NavigationProperty Name="LKP_SurveyReferrer" Relationship="DataModel.FK_Login_Survey_HearAbout" FromRole="Login" ToRole="LKP_SurveyReferrer" />
+          <NavigationProperty Name="Student" Relationship="DataModel.FK_Login_Student" FromRole="Login" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="REL_Student_StudentService">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Student" Type="Int32" Nullable="false" />
+          <Property Name="FK_Program" Type="Int32" Nullable="false" />
+          <Property Name="IsCurrent" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LKP_StudentServiceProgram" Relationship="DataModel.FK_REL_StudentService" FromRole="REL_Student_StudentService" ToRole="LKP_StudentServiceProgram" />
+          <NavigationProperty Name="Student" Relationship="DataModel.FK_REL_Student" FromRole="REL_Student_StudentService" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FK_NativeLanguage" Type="Int32" />
+          <Property Name="FK_CountryOfOrigin" Type="Int32" />
+          <Property Name="FK_ProgramOfStudy" Type="Int32" />
+          <NavigationProperty Name="LKP_CountryOfOrigin" Relationship="DataModel.FK_Student_Country" FromRole="Student" ToRole="LKP_CountryOfOrigin" />
+          <NavigationProperty Name="LKP_NativeLanguage" Relationship="DataModel.FK_Student_Language" FromRole="Student" ToRole="LKP_NativeLanguage" />
+          <NavigationProperty Name="LKP_ProgramOfStudy" Relationship="DataModel.FK_Student_Program" FromRole="Student" ToRole="LKP_ProgramOfStudy" />
+          <NavigationProperty Name="Login" Relationship="DataModel.FK_Login_Student" FromRole="Student" ToRole="Login" />
+          <NavigationProperty Name="REL_Student_StudentService" Relationship="DataModel.FK_REL_Student" FromRole="Student" ToRole="REL_Student_StudentService" />
+        </EntityType>
+        <Association Name="FK_Login_AoA">
+          <End Type="DataModel.AreaOfAssistance" Role="AreaOfAssistance" Multiplicity="1" />
+          <End Type="DataModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaOfAssistance">
+              <PropertyRef Name="AreaID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="FK_AreaOfAssistance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Campus">
+          <End Type="DataModel.LKP_Campus" Role="LKP_Campus" Multiplicity="1" />
+          <End Type="DataModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_Campus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="FK_Campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Country">
+          <End Type="DataModel.LKP_CountryOfOrigin" Role="LKP_CountryOfOrigin" Multiplicity="0..1" />
+          <End Type="DataModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_CountryOfOrigin">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="FK_CountryOfOrigin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Category">
+          <End Type="DataModel.LKP_CourseCategory" Role="LKP_CourseCategory" Multiplicity="1" />
+          <End Type="DataModel.LKP_Course" Role="LKP_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_CourseCategory">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="LKP_Course">
+              <PropertyRef Name="FK_Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Course">
+          <End Type="DataModel.LKP_Course" Role="LKP_Course" Multiplicity="0..1" />
+          <End Type="DataModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_Course">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="FK_Course" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Language">
+          <End Type="DataModel.LKP_NativeLanguage" Role="LKP_NativeLanguage" Multiplicity="0..1" />
+          <End Type="DataModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_NativeLanguage">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="FK_NativeLanguage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Program">
+          <End Type="DataModel.LKP_ProgramOfStudy" Role="LKP_ProgramOfStudy" Multiplicity="0..1" />
+          <End Type="DataModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_ProgramOfStudy">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="FK_ProgramOfStudy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REL_StudentService">
+          <End Type="DataModel.LKP_StudentServiceProgram" Role="LKP_StudentServiceProgram" Multiplicity="1" />
+          <End Type="DataModel.REL_Student_StudentService" Role="REL_Student_StudentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_StudentServiceProgram">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="REL_Student_StudentService">
+              <PropertyRef Name="FK_Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Survey_HearAbout">
+          <End Type="DataModel.LKP_SurveyReferrer" Role="LKP_SurveyReferrer" Multiplicity="0..1" />
+          <End Type="DataModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LKP_SurveyReferrer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="FK_SurveyReferrer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Student">
+          <End Type="DataModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="DataModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="FK_Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REL_Student">
+          <End Type="DataModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="DataModel.REL_Student_StudentService" Role="REL_Student_StudentService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="REL_Student_StudentService">
+              <PropertyRef Name="FK_Program" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataEntities">
+          <EntitySetMapping Name="AreaOfAssistance">
+            <EntityTypeMapping TypeName="DataModel.AreaOfAssistance">
+              <MappingFragment StoreEntitySet="AreaOfAssistance">
+                <ScalarProperty Name="SkipsCourseSelection" ColumnName="SkipsCourseSelection" />
+                <ScalarProperty Name="DefaultLogoffMinutes" ColumnName="DefaultLogoffMinutes" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="AreaID" ColumnName="AreaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credentials">
+            <EntityTypeMapping TypeName="DataModel.Credentials">
+              <MappingFragment StoreEntitySet="Credentials">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="WinLogin" ColumnName="WinLogin" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKP_Campus">
+            <EntityTypeMapping TypeName="DataModel.LKP_Campus">
+              <MappingFragment StoreEntitySet="LKP_Campus">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKP_CountryOfOrigin">
+            <EntityTypeMapping TypeName="DataModel.LKP_CountryOfOrigin">
+              <MappingFragment StoreEntitySet="LKP_CountryOfOrigin">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKP_Course">
+            <EntityTypeMapping TypeName="DataModel.LKP_Course">
+              <MappingFragment StoreEntitySet="LKP_Course">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="CourseTitle" ColumnName="CourseTitle" />
+                <ScalarProperty Name="CourseNumber" ColumnName="CourseNumber" />
+                <ScalarProperty Name="FK_Category" ColumnName="FK_Category" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKP_CourseCategory">
+            <EntityTypeMapping TypeName="DataModel.LKP_CourseCategory">
+              <MappingFragment StoreEntitySet="LKP_CourseCategory">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKP_NativeLanguage">
+            <EntityTypeMapping TypeName="DataModel.LKP_NativeLanguage">
+              <MappingFragment StoreEntitySet="LKP_NativeLanguage">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKP_ProgramOfStudy">
+            <EntityTypeMapping TypeName="DataModel.LKP_ProgramOfStudy">
+              <MappingFragment StoreEntitySet="LKP_ProgramOfStudy">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKP_StudentServiceProgram">
+            <EntityTypeMapping TypeName="DataModel.LKP_StudentServiceProgram">
+              <MappingFragment StoreEntitySet="LKP_StudentServiceProgram">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LKP_SurveyReferrer">
+            <EntityTypeMapping TypeName="DataModel.LKP_SurveyReferrer">
+              <MappingFragment StoreEntitySet="LKP_SurveyReferrer">
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="DataModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="FK_SurveyReferrer" ColumnName="FK_SurveyReferrer" />
+                <ScalarProperty Name="SurveyRating" ColumnName="SurveyRating" />
+                <ScalarProperty Name="LogOutTime" ColumnName="LogOutTime" />
+                <ScalarProperty Name="LogInTime" ColumnName="LogInTime" />
+                <ScalarProperty Name="FK_Course" ColumnName="FK_Course" />
+                <ScalarProperty Name="FK_AreaOfAssistance" ColumnName="FK_AreaOfAssistance" />
+                <ScalarProperty Name="FK_Campus" ColumnName="FK_Campus" />
+                <ScalarProperty Name="FK_Student" ColumnName="FK_Student" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REL_Student_StudentService">
+            <EntityTypeMapping TypeName="DataModel.REL_Student_StudentService">
+              <MappingFragment StoreEntitySet="REL_Student_StudentService">
+                <ScalarProperty Name="IsCurrent" ColumnName="IsCurrent" />
+                <ScalarProperty Name="FK_Program" ColumnName="FK_Program" />
+                <ScalarProperty Name="FK_Student" ColumnName="FK_Student" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="DataModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="FK_ProgramOfStudy" ColumnName="FK_ProgramOfStudy" />
+                <ScalarProperty Name="FK_CountryOfOrigin" ColumnName="FK_CountryOfOrigin" />
+                <ScalarProperty Name="FK_NativeLanguage" ColumnName="FK_NativeLanguage" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="525d8dfdeb494a7a9afaefdd48540f11" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="DataModel.AreaOfAssistance" Width="1.5" PointX="7.125" PointY="1.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="DataModel.Credentials" Width="1.5" PointX="9.5" PointY="4" />
+        <EntityTypeShape EntityType="DataModel.LKP_Campus" Width="1.5" PointX="7.125" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="DataModel.LKP_CountryOfOrigin" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="DataModel.LKP_Course" Width="1.5" PointX="7.125" PointY="1.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="DataModel.LKP_CourseCategory" Width="1.5" PointX="8.875" PointY="1.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="DataModel.LKP_NativeLanguage" Width="1.5" PointX="0.5" PointY="1.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="DataModel.LKP_ProgramOfStudy" Width="1.5" PointX="0.5" PointY="1.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="DataModel.LKP_StudentServiceProgram" Width="1.5" PointX="0.5" PointY="5" IsExpanded="false" />
+        <EntityTypeShape EntityType="DataModel.LKP_SurveyReferrer" Width="1.5" PointX="7.125" PointY="2.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="DataModel.Login" Width="1.5" PointX="5.25" PointY="0.5" />
+        <EntityTypeShape EntityType="DataModel.REL_Student_StudentService" Width="1.5" PointX="0.5" PointY="2.5" />
+        <EntityTypeShape EntityType="DataModel.Student" Width="1.5" PointX="3" PointY="0.5" />
+        <AssociationConnector Association="DataModel.FK_Login_AoA" />
+        <AssociationConnector Association="DataModel.FK_Login_Campus" />
+        <AssociationConnector Association="DataModel.FK_Student_Country" />
+        <AssociationConnector Association="DataModel.FK_Course_Category" />
+        <AssociationConnector Association="DataModel.FK_Login_Course" />
+        <AssociationConnector Association="DataModel.FK_Student_Language" />
+        <AssociationConnector Association="DataModel.FK_Student_Program" />
+        <AssociationConnector Association="DataModel.FK_REL_StudentService" />
+        <AssociationConnector Association="DataModel.FK_Login_Survey_HearAbout" />
+        <AssociationConnector Association="DataModel.FK_Login_Student" />
+        <AssociationConnector Association="DataModel.FK_REL_Student" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

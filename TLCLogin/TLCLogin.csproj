@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TLCLogin</RootNamespace>
     <AssemblyName>TLCLogin</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -29,6 +29,7 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -96,6 +97,12 @@
     <Compile Include="Data\Logger.cs" />
     <Compile Include="Data\StudentFileReader.cs" />
     <Compile Include="Data\WindowsAuthenticator.cs" />
+    <Compile Include="Models\AreaOfAssistance.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\SpecialProgram.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\TutoringCenter.cs" />
+    <Compile Include="Models\UserLoginModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
